@@ -209,8 +209,9 @@ Options:
 -r|--rm     instead of add, remove assignees in ats from specified task
 ```
 
+</details>
+
 ## 使用示例
-</details><img src="https://github.com/favicon.ico" width="48">
 
 <img src="./doc/image/example1.png" width="400">
 <img src="./doc/image/example2.png" width="400">

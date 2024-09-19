@@ -22,5 +22,5 @@ from nonebot_plugin_apscheduler import scheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 scheduler.add_jobstore(
     SQLAlchemyJobStore(url="sqlite:///" + str(get_data_dir(__plugin_meta__.name) / "apscheduler.sqlite3")),
-    alias='default'
+    alias='nonebot-plugin-yareminder-jobstore'
 )

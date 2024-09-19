@@ -304,6 +304,7 @@ class TaskService(Service):
         )
         job = scheduler.add_job(
             TaskService.send_reminder,
+            jobstore='nonebot-plugin-yareminder-jobstore',
             trigger=trigger,
             args=[task.id],
             name=f"Reminder wakeup timer for task {task.name} ({task.id})"
@@ -318,7 +319,7 @@ class TaskService(Service):
         task = await self.__get_task(task_id)
         if task.apscheduler_job_id:
             try:
-                scheduler.remove_job(task.apscheduler_job_id)
+                scheduler.remove_job(task.apscheduler_job_id, 'nonebot-plugin-yareminder-jobstore')
                 logger.debug(f"Removed reminder for task {task.id}")
             except JobLookupError:
                 logger.warning(f"Job {task.apscheduler_job_id} not found for task {task.id}")

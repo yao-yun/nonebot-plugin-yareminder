@@ -46,6 +46,5 @@ alc = Alconna(
         Arg("task_name", str),
         Option("-r|--rm"),
         Arg("?assignees", MultiVar(At))
-    ),
-    Subcommand("purge-jobs")
+    )
 )

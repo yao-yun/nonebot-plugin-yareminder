@@ -1,15 +1,6 @@
-<div align="center">
-  <a href="https://v2.nonebot.dev/store"><img src="https://github.com/A-kirami/nonebot-plugin-yareminder/blob/resources/nbp_logo.png" width="180" height="180" alt="NoneBotPluginLogo"></a>
-  <br>
-  <p><img src="https://github.com/A-kirami/nonebot-plugin-yareminder/blob/resources/NoneBotPlugin.svg" width="240" alt="NoneBotPluginText"></p>
-</div>
-
-<div align="center">
-
 # nonebot-plugin-yareminder
 
-又一个提醒插件、支持按任务配置提醒间隔/时间和重复、打卡完成
-
+又一个提醒插件、支持完成打卡及按任务配置提醒间隔/时间和重复间隔/类型、
 
 <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/yao-yun/nonebot-plugin-yareminder.svg" alt="license">
@@ -37,6 +28,7 @@
 - refactor/更好的检索任务函数
 - refactor/加测试
 - feat/统计拖延时间
+- fix/时间的自然语言输出在1-3周内差一周
 - feat/更激进或烦人的提醒：跨群聊乃至平台寻找任务指派人并提醒
 - feat/请假及暂停功能：对特定任务/时间段请假（自动跳过）或在特定时间段内暂停任务
 - feat/静音提醒：收到提醒消息后手动确认可一段时间内暂停提醒
@@ -163,7 +155,9 @@ Options:
 </details>
 
 <details>
+
 <summary>查看/修改任务到期时间</summary>
+
 ```commandline
 :rmd due
 Usage: rmd due TASK_NAME [OPTIONS]

@@ -6,7 +6,7 @@ from .command import rmd_app
 __plugin_meta__ = PluginMetadata(
     name="nonebot-plugin-yareminder",
     description="Yet another reminder plugin supporting per-task configuration and check-in.",
-    usage="*WIP*",
+    usage=":rmd COMMAND [ARGS] [OPTIONS]",
     type="application",
 )
 

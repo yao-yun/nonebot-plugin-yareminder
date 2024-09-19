@@ -8,6 +8,7 @@ __plugin_meta__ = PluginMetadata(
     description="Yet another reminder plugin supporting per-task configuration and check-in.",
     usage=":rmd COMMAND [ARGS] [OPTIONS]",
     type="application",
+    homepage="https://github.com/yao-yun/nonebot-plugin-yareminder"
 )
 
 require('nonebot_plugin_saa')

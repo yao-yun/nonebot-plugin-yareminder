@@ -209,11 +209,8 @@ Options:
 -r|--rm     instead of add, remove assignees in ats from specified task
 ```
 
-</details>
-
 ## 使用示例
-
-![](./doc/image/example1.png)
-![](./doc/image/example2.png)
-![](./doc/image/example3.png)
-![](./doc/image/example4.png)
+<img src="./doc/image/example1.png" width="400">
+<img src="./doc/image/example2.png" width="400">
+<img src="./doc/image/example3.png" width="400">
+<img src="./doc/image/example4.png" width="400">

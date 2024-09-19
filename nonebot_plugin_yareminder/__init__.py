@@ -3,15 +3,18 @@ from nonebot.plugin import PluginMetadata
 
 from .command import rmd_app
 
+require('nonebot_plugin_saa')
+from nonebot_plugin_saa import __plugin_meta__ as __saa_plugin_meta__
+
 __plugin_meta__ = PluginMetadata(
     name="nonebot-plugin-yareminder",
     description="Yet another reminder plugin supporting per-task configuration and check-in.",
     usage=":rmd COMMAND [ARGS] [OPTIONS]",
     type="application",
-    homepage="https://github.com/yao-yun/nonebot-plugin-yareminder"
+    homepage="https://github.com/yao-yun/nonebot-plugin-yareminder",
+    supported_adapters=__saa_plugin_meta__.supported_adapters
 )
 
-require('nonebot_plugin_saa')
 from nonebot_plugin_saa import enable_auto_select_bot
 enable_auto_select_bot()
 

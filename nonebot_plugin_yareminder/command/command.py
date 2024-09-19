@@ -56,11 +56,11 @@ async def rmd_delete(result: Arparma, saa_target: SaaTarget, task_service: Annot
     try:
         task_id: UUID = (await task_service.search_task(result["rm.task_name"], saa_target)).scalar_one()
     except NoResultFound or MultipleResultsFound as e:
-        logger.error(f"Unable to query task with name {result["rm.task_name"]}: {e}")
-        await rmd_app.finish(f"查找任务\"{result["rm.task_name"]}\"时发生错误")
+        logger.error(f"Unable to query task with name {result['rm.task_name']}: {e}")
+        await rmd_app.finish(f"查找任务\"{result['rm.task_name']}\"时发生错误")
     else:
         await task_service.delete_task(task_id)
-        await rmd_app.finish(f"任务\"{result["rm.task_name"]}\"已删除")
+        await rmd_app.finish(f"任务\"{result['rm.task_name']}\"已删除")
 
 
 @rmd_app.assign("ls")
@@ -77,7 +77,7 @@ async def rmd_ls(saa_target: SaaTarget, task_service: Annotated[TaskService, Dep
 
 @rmd_app.assign("finish")
 async def rmd_finish(result: Arparma, saa_target: SaaTarget, event: Event, task_service: Annotated[TaskService, Depends(get_task_service)]):
-    logger.info(f"Finishing ... Lookup task {result["?task_name"]}")
+    logger.info(f"Finishing ... Lookup task {result['?task_name']}")
 
     if not result["?task_name"]:
         logger.info(f"Try finish task in current chat for current user if one and only")
@@ -99,7 +99,7 @@ async def rmd_finish(result: Arparma, saa_target: SaaTarget, event: Event, task_
         try:
             task_id = (await task_service.search_task(task_name=result["?task_name"], scope=saa_target)).scalar_one()
         except NoResultFound:
-            await rmd_app.finish(f"当前聊天下无“{result["?task_name"]}”任务")
+            await rmd_app.finish(f"当前聊天下无“{result['?task_name']}”任务")
         else:
             await task_service.finish_task(task_id)
             await ("任务已完成，下一次：" + await task_service.describe_task(task_id)).send()
@@ -108,7 +108,7 @@ async def rmd_finish(result: Arparma, saa_target: SaaTarget, event: Event, task_
 @rmd_app.assign("skip")
 async def rmd_skip(result: Arparma, saa_target: SaaTarget, event: Event, task_service: Annotated[TaskService, Depends(get_task_service)]):
     offset = result["offset"]
-    logger.info(f"Skipping by {offset} ... Lookup task {result["?task_name"]}")
+    logger.info(f"Skipping by {offset} ... Lookup task {result['?task_name']}")
 
     if not result["?task_name"]:
         logger.info(f"Try skip task in current chat for current user if one and only")
@@ -131,7 +131,7 @@ async def rmd_skip(result: Arparma, saa_target: SaaTarget, event: Event, task_se
         try:
             task_id = (await task_service.search_task(task_name=result["?task_name"], scope=saa_target)).scalar_one()
         except NoResultFound:
-            await rmd_app.finish(f"当前聊天下无“{result["?task_name"]}”任务")
+            await rmd_app.finish(f"当前聊天下无“{result['?task_name']}”任务")
         else:
             await task_service.skip_task(task_id, offset)
             await ("任务已跳过，下一次：" + await task_service.describe_task(task_id)).send()

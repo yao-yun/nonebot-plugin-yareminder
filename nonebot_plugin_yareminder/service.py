@@ -94,7 +94,7 @@ class TaskService(Service):
             return result.scalar_one()
         except NoResultFound:
             logger.error(f"Task with ID {task_id} not found.")
-            raise NoResultFound(f"No {"undeleted " if not include_deleted else ""}task has id {task_id}")
+            raise NoResultFound(f"No {'undeleted ' if not include_deleted else ''}task has id {task_id}")
 
     async def create_task(
             self,

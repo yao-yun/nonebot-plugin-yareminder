@@ -210,6 +210,8 @@ Options:
 ```
 
 ## 使用示例
+</details><img src="https://github.com/favicon.ico" width="48">
+
 <img src="./doc/image/example1.png" width="400">
 <img src="./doc/image/example2.png" width="400">
 <img src="./doc/image/example3.png" width="400">

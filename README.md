@@ -1,78 +1,55 @@
 <div align="center">
-  <a href="https://v2.nonebot.dev/store"><img src="https://github.com/A-kirami/nonebot-plugin-template/blob/resources/nbp_logo.png" width="180" height="180" alt="NoneBotPluginLogo"></a>
+  <a href="https://v2.nonebot.dev/store"><img src="https://github.com/A-kirami/nonebot-plugin-yareminder/blob/resources/nbp_logo.png" width="180" height="180" alt="NoneBotPluginLogo"></a>
   <br>
-  <p><img src="https://github.com/A-kirami/nonebot-plugin-template/blob/resources/NoneBotPlugin.svg" width="240" alt="NoneBotPluginText"></p>
+  <p><img src="https://github.com/A-kirami/nonebot-plugin-yareminder/blob/resources/NoneBotPlugin.svg" width="240" alt="NoneBotPluginText"></p>
 </div>
 
 <div align="center">
 
-# nonebot-plugin-template
+# nonebot-plugin-yareminder
 
-_✨ NoneBot 插件简单描述 ✨_
+又一个提醒插件、支持按任务配置提醒间隔/时间和重复、打卡完成
 
 
 <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/owner/nonebot-plugin-template.svg" alt="license">
+    <img src="https://img.shields.io/github/license/yao-yun/nonebot-plugin-yareminder.svg" alt="license">
 </a>
-<a href="https://pypi.python.org/pypi/nonebot-plugin-template">
-    <img src="https://img.shields.io/pypi/v/nonebot-plugin-template.svg" alt="pypi">
+<a href="https://pypi.python.org/pypi/nonebot-plugin-yareminder">
+    <img src="https://img.shields.io/pypi/v/nonebot-plugin-yareminder.svg" alt="pypi">
 </a>
 <img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="python">
 
 </div>
 
-这是一个 nonebot2 插件项目的模板库, 你可以直接使用本模板创建你的 nonebot2 插件项目的仓库
 
-<details open>
-<summary>模板库使用方法</summary>
+## 介绍
 
-1. 点击 [![start-course](https://user-images.githubusercontent.com/1221423/235727646-4a590299-ffe5-480d-8cd5-8194ea184546.svg)](https://github.com/new?template_owner=A-kirami&template_name=nonebot-plugin-template&owner=%40me&name=nonebot-plugin-&visibility=public) 创建仓库
-2. 在创建好的新仓库中, 在 "Add file" 菜单中选择 "Create new file", 在新文件名处输入`LICENSE`, 此时在右侧会出现一个 "Choose a license template" 按钮, 点击此按钮选择开源协议模板, 然后在最下方提交新文件到主分支
-3. 全局替换`owner`为仓库所有者ID; 全局替换`nonebot-plugin-template`为插件名; 全局替换`nonebot_plugin_template`为包名; 修改 python 徽标中的版本为你插件的运行所需版本
-4. 修改 README 中的插件名和插件描述, 并在下方填充相应的内容
+通过对话按群聊/私聊管理定时提醒任务的Nonebot2插件。相比常见的待办/日历应用，和IM结合大概能起到全自动压力/催人的作用，在活跃群聊中使用有奇效。
 
-</details>
+- 指派任务并循环At提醒
+- 需要手动打卡完成任务
+- 根据完成时间/固定间隔重复提醒
+- 基于 [nonebot-plugin-saa](https://github.com/MountainDash/nonebot-plugin-send-anything-anywhere) 的跨适配器支持
+- 基于 [nonebot-plugin-orm](https://github.com/nonebot/plugin-orm) 的持久化
 
-> [!NOTE]
-> 模板库中自带了一个发布工作流, 你可以使用此工作流自动发布你的插件到 pypi
+## 计划
 
-<details>
-<summary>配置发布工作流</summary>
+- refactor/更好的检索任务函数
+- refactor/加测试
+- feat/统计拖延时间
+- feat/更激进或烦人的提醒：跨群聊乃至平台寻找任务指派人并提醒
+- feat/请假及暂停功能：对特定任务/时间段请假（自动跳过）或在特定时间段内暂停任务
+- feat/静音提醒：收到提醒消息后手动确认可一段时间内暂停提醒
+- feat/用户系统：单用户多平台/多账号支持、昵称
+- feat/可填入格式化模板的提醒内容
 
-1. 前往 https://pypi.org/manage/account/#api-tokens 并创建一个新的 API 令牌。创建成功后不要关闭页面，不然你将无法再次查看此令牌。
-2. 在单独的浏览器选项卡或窗口中，打开 [Actions secrets and variables](./settings/secrets/actions) 页面。你也可以在 Settings - Secrets and variables - Actions 中找到此页面。
-3. 点击 New repository secret 按钮，创建一个名为 `PYPI_API_TOKEN` 的新令牌，并从第一步复制粘贴令牌。
-
-</details>
-
-> [!IMPORTANT]
-> 这个发布工作流需要 pyproject.toml 文件, 并且只支持 [PEP 621](https://peps.python.org/pep-0621/) 标准的 pyproject.toml 文件
-
-<details>
-<summary>触发发布工作流</summary>
-从本地推送任意 tag 即可触发。
-
-创建 tag:
-
-    git tag <tag_name>
-
-推送本地所有 tag:
-
-    git push origin --tags
-
-</details>
-
-## 📖 介绍
-
-这里是插件的详细介绍部分
-
-## 💿 安装
+## 安装
 
 <details open>
 <summary>使用 nb-cli 安装</summary>
 在 nonebot2 项目的根目录下打开命令行, 输入以下指令即可安装
 
-    nb plugin install nonebot-plugin-template
+    nb plugin install nonebot-plugin-yareminder
 
 </details>
 
@@ -83,44 +60,159 @@ _✨ NoneBot 插件简单描述 ✨_
 <details>
 <summary>pip</summary>
 
-    pip install nonebot-plugin-template
+    pip install nonebot-plugin-yareminder
 </details>
 <details>
 <summary>pdm</summary>
 
-    pdm add nonebot-plugin-template
+    pdm add nonebot-plugin-yareminder
 </details>
 <details>
 <summary>poetry</summary>
 
-    poetry add nonebot-plugin-template
+    poetry add nonebot-plugin-yareminder
 </details>
 <details>
 <summary>conda</summary>
 
-    conda install nonebot-plugin-template
+    conda install nonebot-plugin-yareminder
 </details>
 
 打开 nonebot2 项目根目录下的 `pyproject.toml` 文件, 在 `[tool.nonebot]` 部分追加写入
 
-    plugins = ["nonebot_plugin_template"]
+    plugins = ["nonebot_plugin_yareminder"]
 
 </details>
 
-## ⚙️ 配置
-
-在 nonebot2 项目的`.env`文件中添加下表中的必填配置
-
-| 配置项 | 必填 | 默认值 | 说明 |
-|:-----:|:----:|:----:|:----:|
-| 配置项1 | 是 | 无 | 配置说明 |
-| 配置项2 | 否 | 无 | 配置说明 |
-
-## 🎉 使用
+## 使用
 ### 指令表
-| 指令 | 权限 | 需要@ | 范围 | 说明 |
-|:-----:|:----:|:----:|:----:|:----:|
-| 指令1 | 主人 | 否 | 私聊 | 指令说明 |
-| 指令2 | 群员 | 是 | 群聊 | 指令说明 |
-### 效果图
-如果有效果图的话
+
+```commandline
+:rmd
+Usage: :rmd COMMAND [OPTIONS] [ARGS] ...
+
+Commands:
+  add       Create a task
+  rm        Delete a task
+  ls        List all tasks in current chat
+  finish    Finish a task (and triggers reoccurence if set)
+  skip      Skip a task('s assignee) to the next or specified offset
+  due       Show / Change the due time of a task
+  remind    Show / Change the remind interval / starting time of a task
+  recur     Show / Change the recurrence type / interval of a task
+  assign    Show / Change the assignee(s) of a task
+```
+
+<details>
+<summary>添加任务</summary>
+
+```commandline
+:rmd add
+Usage: :rmd add TASK_NAME DUE_TIME [OPTIONS]
+
+Options:
+-i | --remind-interval <datetime_str>       Specify remind interval
+-o | --remind-offset XdXhXmXs               Specify when to begin reminding relative to due time
+-t | --recur-type OnFinish|Regular|Never    Specify recurrence type
+-r | --recur-interval XdXhXmXs              Specify recurrence interval
+
+```
+</details>
+
+<details>
+<summary>删除任务</summary>
+
+```commandline
+:rmd rm
+Usage: :rmd rm TASK_NAME
+```
+
+</details>
+
+<details>
+<summary>列出任务</summary>
+
+```commandline
+:rmd ls
+Usage: :rmd ls
+```
+
+</details>
+
+<details>
+<summary>完成任务</summary>
+
+```commandline
+:rmd finish
+Usage: :rmd finish [TASK_NAME]
+```
+
+</details>
+
+<details>
+<summary>跳过任务</summary>
+
+```commandline
+:rmd skip
+Usage: rmd skip [TASK_NAME] [OPTIONS]
+
+Options:
+--offset n    Skip to the nth assignee after the current one
+```
+
+</details>
+
+<details>
+<summary>查看/修改任务到期时间</summary>
+```commandline
+:rmd due
+Usage: rmd due TASK_NAME [OPTIONS]
+
+Options:
+--shift XdXhXmXs        shift the due time by a time range
+--set <datetime_str>    set the due time directly
+```
+
+</details>
+
+<details>
+<summary>查看/修改任务提醒提前时间/周期</summary>
+
+```commandline
+:rmd remind
+Usage: rmd remind TASK_NAME [OPTIONS]
+
+Options:
+-o|--offset +/-XdXhXmXs set how long to remind in advance of due time
+-i|--interval XdXhXmXs  set remind interval
+```
+
+
+</details>
+
+<details>
+<summary>查看/修改任务重复类型/周期</summary>
+
+```commandline
+:rmd recur
+Usage: rmd recur TASK_NAME [OPTIONS]
+
+Options:
+-t|--type OnFinish|Regular|Never    set recurrence type 
+-i|--interval XdXhXmXs              set recurrence interval
+```
+
+</details>
+
+<details>
+<summary>查看/修改任务指派</summary>
+
+```commandline
+:rmd assign
+Usage: rmd assign TASK_NAME [OPTIONS] [AT1] [AT2] ...
+
+Options:
+-r|--rm     instead of add, remove assignees in ats from specified task
+```
+
+</details>

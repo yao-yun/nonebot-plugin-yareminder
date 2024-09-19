@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "nonebot-plugin-yareminder"
+version = "0.1.0"
+description = "Yet another nonebot reminder plugin, providing scheduled and repetitive task reminders with per-task configuration and check-in."
+authors = ["Yaoyun Zhang <yaoyun_zhang@outlook.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+nonebot2 = "^2.3.3"
+nonebot-plugin-orm = {extras = ["sqlite"], version = "^0.7.6"}
+nonebot-plugin-send-anything-anywhere = "^0.7.1"
+nonebot-plugin-apscheduler = "^0.5.0"
+pendulum = "^3.0.0"
+nonebot-plugin-alconna = "^0.52.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

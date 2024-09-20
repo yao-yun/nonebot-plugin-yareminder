@@ -1,7 +1,10 @@
 from nonebot import require
-from nonebot.plugin import PluginMetadata
+from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 
 from .command import rmd_app
+
+require('nonebot_plugin_saa')
+require('nonebot_plugin_alconna')
 
 __plugin_meta__ = PluginMetadata(
     name="nonebot-plugin-yareminder",
@@ -9,18 +12,9 @@ __plugin_meta__ = PluginMetadata(
     usage=":rmd COMMAND [ARGS] [OPTIONS]",
     type="application",
     homepage="https://github.com/yao-yun/nonebot-plugin-yareminder",
-    supported_adapters={
-        "~onebot.v11",
-        "~onebot.v12",
-        "~kaiheila",
-        "~telegram",
-        "~feishu",
-        "~red",
-        "~qq",
-    },
+    supported_adapters=inherit_supported_adapters('nonebot_plugin_saa', 'nonebot_plugin_alconna')
 )
 
-require('nonebot_plugin_saa')
 from nonebot_plugin_saa import enable_auto_select_bot
 enable_auto_select_bot()
 

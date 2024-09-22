@@ -7,7 +7,7 @@ from nonebot import require, logger
 from collections.abc import AsyncGenerator
 
 from .models import TaskModel, AssigneeModel, AssignmentModel, RecordModel
-from .utils import natural_lang_date, RecurType
+from .utils import natural_lang_date, natural_lang_timedelta, RecurType
 
 require("nonebot_plugin_apscheduler")
 from nonebot_plugin_apscheduler import scheduler
@@ -357,13 +357,15 @@ class TaskService(Service):
     async def describe_recurrence(self, task_id: uuid.UUID) -> Text:
         """Return a Text that describes the recurrence """
         task = await self.__get_task(task_id)
+        if task.recur_interval:
+            diff_str, negative = natural_lang_timedelta(task.recur_interval)
         match task.recur_type:
             case RecurType.Never:
                 return Text("不重复")
             case RecurType.OnFinish:
-                return Text(f"完成{task.recur_interval}后重复")
+                return Text(f"完成{diff_str}后重复")
             case RecurType.Regular:
-                return Text(f"每{task.recur_interval}重复")
+                return Text(f"每{diff_str}重复")
 
     async def describe_due_time(self, task_id: uuid.UUID) -> Text:
         """Return a Text that describes the recurrence """
@@ -373,7 +375,9 @@ class TaskService(Service):
     async def describe_remind(self, task_id: uuid.UUID) -> Text:
         """Returns a Text that describes the reminder offset"""
         task = await self.__get_task(task_id)
-        return Text(f"提前{task.remind_offset}提醒，提醒间隔{task.remind_interval}")
+        offset_str, offset_negative = natural_lang_timedelta(task.remind_offset)
+        interval_str, interval_negative = natural_lang_timedelta(task.remind_interval)
+        return Text(f"{'提前' if offset_negative else '延后'}{offset_str}，间隔{interval_str}提醒")
 
     async def describe_assignee(self, task_id: uuid.UUID) -> MessageFactory:
         """Returns a MessageFactory that describes the assignees and current one"""

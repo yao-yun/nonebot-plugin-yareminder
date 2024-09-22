@@ -25,15 +25,16 @@
 
 ## 计划
 
-- refactor/更好的检索任务函数
-- refactor/加测试
-- feat/统计拖延时间
-- fix/时间的自然语言输出在1-3周内差一周
-- feat/更激进或烦人的提醒：跨群聊乃至平台寻找任务指派人并提醒
-- feat/请假及暂停功能：对特定任务/时间段请假（自动跳过）或在特定时间段内暂停任务
-- feat/静音提醒：收到提醒消息后手动确认可一段时间内暂停提醒
-- feat/用户系统：单用户多平台/多账号支持、昵称
-- feat/可填入格式化模板的提醒内容
+- [ ] refactor/更好的检索任务函数
+- [ ] refactor/加测试
+- [ ] feat/统计拖延时间
+- [x] fix/时间的自然语言输出在1-3周内差一周
+- [x] refactor/更自然的duration/timedelta描述
+- [ ] feat/更激进或烦人的提醒：跨群聊乃至平台寻找任务指派人并提醒
+- [ ] feat/请假及暂停功能：对特定任务/时间段请假（自动跳过）或在特定时间段内暂停任务
+- [ ] feat/静音提醒：收到提醒消息后手动确认可一段时间内暂停提醒
+- [ ] feat/用户系统：单用户多平台/多账号支持、昵称
+- [ ] feat/可填入格式化模板的提醒内容
 
 ## 安装
 
@@ -213,7 +214,4 @@ Options:
 
 ## 使用示例
 
-<img src="./doc/image/example1.png" width="400">
-<img src="./doc/image/example2.png" width="400">
-<img src="./doc/image/example3.png" width="400">
-<img src="./doc/image/example4.png" width="400">
+<img src="./doc/image/example.png" width="400">

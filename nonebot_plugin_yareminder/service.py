@@ -20,6 +20,7 @@ require("nonebot_plugin_orm")
 from nonebot_plugin_orm import get_session, async_scoped_session, AsyncSession, get_scoped_session
 from sqlalchemy.future import select
 from sqlalchemy.exc import NoResultFound, IntegrityError
+from sqlalchemy import func, and_
 
 
 def ensure_provided(ensure_args: list, not_none: int):
@@ -42,8 +43,8 @@ class Service:
         if exc_type:
             await self.session.rollback()  # Rollback if an error occurred
         else:
-            await self.session.commit()    # Commit if no exception
-        await self.session.close()         # Close the session
+            await self.session.commit()  # Commit if no exception
+        await self.session.close()  # Close the session
 
 
 class TaskService(Service):
@@ -58,7 +59,8 @@ class TaskService(Service):
             include_deleted: bool = False
     ):
         """Search for tasks with `task_name` in a scope of SaaTarget"""
-        logger.debug(f"Searching tasks with the following filters: task_name={task_name}, scope={scope.model_dump_json()}, user_id={user_id}, include_deleted={include_deleted}")
+        logger.debug(
+            f"Searching tasks with the following filters: task_name={task_name}, scope={scope.model_dump_json()}, user_id={user_id}, include_deleted={include_deleted}")
         stmt = select(TaskModel.id)
         if task_name is not None:
             stmt = stmt.where(TaskModel.name == task_name)
@@ -193,6 +195,25 @@ class TaskService(Service):
         logger.debug(f"Assignee count: {assignee_count}, current order: {task.current_assignment_order}")
 
         await self.session.commit()
+
+    async def stat_delay(self, task_id: uuid.UUID, assignee_id: uuid.UUID) -> timedelta:
+        """Stat the delay of a user"""
+        logger.info(f"Stating the delayed time of a user in a task")
+
+        total_time_diff = (await self.session.execute(
+            select(
+                func.sum(
+                    func.julianday(RecordModel.finish_time) - func.julianday(RecordModel.due_time)
+                )
+            ).where(
+                and_(
+                    RecordModel.task_id == task_id,
+                    RecordModel.assignee_id == assignee_id
+                )
+            )
+        )).scalar()
+
+        return timedelta(days=total_time_diff) if total_time_diff else timedelta(0)
 
     async def create_assignments(self, task_id: uuid.UUID, assignee_ids: Iterable[uuid.UUID]) -> None:
         """Create assignments."""
@@ -409,8 +430,8 @@ class TaskService(Service):
         else:
             msg += f"[{task.name}] "
             msg += (await self.describe_due_time(task_id)) + "，"
-            msg += (await self.describe_remind(task_id))+ "，"
-            msg += (await self.describe_recurrence(task_id))+ "，"
+            msg += (await self.describe_remind(task_id)) + "，"
+            msg += (await self.describe_recurrence(task_id)) + "，"
             msg += (await self.describe_assignee(task_id))
 
         return msg

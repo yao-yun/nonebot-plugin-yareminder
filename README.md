@@ -27,7 +27,7 @@
 
 - [ ] refactor/更好的检索任务函数
 - [ ] refactor/加测试
-- [ ] feat/统计拖延时间
+- [x] feat/统计拖延时间
 - [x] fix/时间的自然语言输出在1-3周内差一周
 - [x] refactor/更自然的duration/timedelta描述
 - [ ] feat/更激进或烦人的提醒：跨群聊乃至平台寻找任务指派人并提醒
@@ -81,8 +81,8 @@
 ### 指令表
 
 ```commandline
-:rmd
-Usage: :rmd COMMAND [OPTIONS] [ARGS] ...
+<command_start>rmd
+Usage: rmd COMMAND [OPTIONS] [ARGS] ...
 
 Commands:
   add       Create a task
@@ -94,13 +94,14 @@ Commands:
   remind    Show / Change the remind interval / starting time of a task
   recur     Show / Change the recurrence type / interval of a task
   assign    Show / Change the assignee(s) of a task
+  stat      Calculated the total delayed time of assignee(s) on a task
 ```
 
 <details>
 <summary>添加任务</summary>
 
 ```commandline
-:rmd add
+rmd add
 Usage: :rmd add TASK_NAME DUE_TIME [OPTIONS]
 
 Options:
@@ -116,7 +117,7 @@ Options:
 <summary>删除任务</summary>
 
 ```commandline
-:rmd rm
+rmd rm
 Usage: :rmd rm TASK_NAME
 ```
 
@@ -126,7 +127,7 @@ Usage: :rmd rm TASK_NAME
 <summary>列出任务</summary>
 
 ```commandline
-:rmd ls
+rmd ls
 Usage: :rmd ls
 ```
 
@@ -136,7 +137,7 @@ Usage: :rmd ls
 <summary>完成任务</summary>
 
 ```commandline
-:rmd finish
+rmd finish
 Usage: :rmd finish [TASK_NAME]
 ```
 
@@ -146,7 +147,7 @@ Usage: :rmd finish [TASK_NAME]
 <summary>跳过任务</summary>
 
 ```commandline
-:rmd skip
+rmd skip
 Usage: rmd skip [TASK_NAME] [OPTIONS]
 
 Options:
@@ -160,7 +161,7 @@ Options:
 <summary>查看/修改任务到期时间</summary>
 
 ```commandline
-:rmd due
+rmd due
 Usage: rmd due TASK_NAME [OPTIONS]
 
 Options:
@@ -174,7 +175,7 @@ Options:
 <summary>查看/修改任务提醒提前时间/周期</summary>
 
 ```commandline
-:rmd remind
+rmd remind
 Usage: rmd remind TASK_NAME [OPTIONS]
 
 Options:
@@ -189,7 +190,7 @@ Options:
 <summary>查看/修改任务重复类型/周期</summary>
 
 ```commandline
-:rmd recur
+rmd recur
 Usage: rmd recur TASK_NAME [OPTIONS]
 
 Options:
@@ -203,11 +204,21 @@ Options:
 <summary>查看/修改任务指派</summary>
 
 ```commandline
-:rmd assign
+rmd assign
 Usage: rmd assign TASK_NAME [OPTIONS] [AT1] [AT2] ...
 
 Options:
 -r|--rm     instead of add, remove assignees in ats from specified task
+```
+
+</details>
+
+<details>
+<summary>计算拖延时间</summary>
+
+```commandline
+rmd assign
+Usage: rmd stat TASK_NAME [AT1] [AT2] ...
 ```
 
 </details>

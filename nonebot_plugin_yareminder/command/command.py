@@ -1,5 +1,6 @@
 from ..service import TaskService, AssigneeService, get_task_service, get_assignee_service
 from .alconna import alc
+from ..utils import natural_lang_timedelta
 
 from nonebot import require, logger
 from nonebot.params import Depends
@@ -8,7 +9,7 @@ from typing import Annotated
 from uuid import UUID 
 
 require("nonebot_plugin_saa")
-from nonebot_plugin_saa import SaaTarget, MessageFactory
+from nonebot_plugin_saa import SaaTarget, MessageFactory, Mention
 
 require("nonebot_plugin_orm")
 from sqlalchemy.exc import NoResultFound, MultipleResultsFound
@@ -193,3 +194,29 @@ async def rmd_assign(result: Arparma, saa_target: SaaTarget, task_service: Annot
 
     msg = await task_service.describe_assignee(task_id)
     await msg.send()
+
+
+@rmd_app.assign("stat")
+async def rmd_stat(
+        result: Arparma,
+        saa_target: SaaTarget,
+        task_service: Annotated[TaskService, Depends(get_task_service)],
+        assignee_service: AssigneeService = Depends(get_assignee_service)
+):
+    task_id = (await task_service.search_task(task_name=result["stat.task_name"], scope=saa_target)).scalar_one()
+    assignee_targets = [a.target for a in result["stat.?assignees"]]
+    assignee_ids = [(await assignee_service.add_assignee(t)) for t in assignee_targets]
+
+    delays = [(await task_service.stat_delay(task_id, assignee_id)) for assignee_id in assignee_ids]
+    logger.debug(f"Delay stat: {delays}")
+    msg = MessageFactory("延迟统计如下：")
+    for i in range(len(assignee_targets)):
+        msg += [
+            f"\n",
+            Mention(assignee_targets[i]),
+            f" - ",
+            natural_lang_timedelta(delays[i])[0]
+        ]
+
+    await msg.send()
+    await rmd_app.finish()

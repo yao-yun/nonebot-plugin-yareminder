@@ -1,14 +1,19 @@
 from ..utils import to_datetime, to_timedelta, to_recurtype, RecurType
 
-from nonebot import require
+from nonebot import require, get_driver, logger
 from datetime import timedelta
 
 require("nonebot_plugin_alconna")
 from nonebot_plugin_alconna import At
 from arclet.alconna import Arg, Alconna, Option, MultiVar, Subcommand
 
+config = get_driver().config
+command_start = [member for member in config.command_start]
+logger.debug(command_start)
+
 alc = Alconna(
-    ":rmd",
+    "rmd",
+    command_start,
     Subcommand("now"),
     Subcommand(
         "add",
@@ -45,6 +50,11 @@ alc = Alconna(
         "assign",
         Arg("task_name", str),
         Option("-r|--rm"),
+        Arg("?assignees", MultiVar(At))
+    ),
+    Subcommand(
+        "stat",
+        Arg("task_name", str),
         Arg("?assignees", MultiVar(At))
     )
 )
